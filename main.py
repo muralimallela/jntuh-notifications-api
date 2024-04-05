@@ -2,7 +2,8 @@ from fastapi import FastAPI, Query,status
 from bs4 import BeautifulSoup
 import requests
 import re
-import json
+import uvicorn
+from os import getenv
 
 app = FastAPI()
 
@@ -47,3 +48,8 @@ async def fetch_data(query: str = Query(None)):
             return {"message": f"Failed to fetch the HTML content. Status code: {response.status_code}"}
     except requests.RequestException as e:
         return {"message": f"Error fetching the HTML content: {e}"}
+
+
+if __name__ == "__main__":
+    port = int(getenv("PORT",8000))
+    uvicorn.run("main:app",host="0.0.0.0",port=port,reload=True)
