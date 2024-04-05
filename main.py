@@ -6,6 +6,10 @@ import json
 
 app = FastAPI()
 
+@app.get("/",status_code=status.HTTP_200_OK)
+@app.head("/")
+def root():
+    return {"message" : "visit URL/docs for api documentation"}
 @app.get("/notifications",status_code=status.HTTP_200_OK)
 async def fetch_data(query: str = Query(None)):
     url = "http://61.1.174.28/jsp/RCRVInfo.jsp"
