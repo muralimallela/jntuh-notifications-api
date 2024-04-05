@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query,status
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -6,7 +6,7 @@ import json
 
 app = FastAPI()
 
-@app.get("/notifications")
+@app.get("/notifications",status_code=status.HTTP_200_OK)
 async def fetch_data(query: str = Query(None)):
     url = "http://61.1.174.28/jsp/RCRVInfo.jsp"
     try:
